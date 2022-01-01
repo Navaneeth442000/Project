@@ -19,7 +19,7 @@ class ScreenLoginSelection extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: Text(
                     'Welcome',
-                    textAlign: TextAlign.left,
+                    // textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 43,
                       fontWeight: FontWeight.w500,
