@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:foodredistribution/screens/login_selection.dart';
-import 'package:foodredistribution/screens/sample.dart';
 import 'package:foodredistribution/screens/splash.dart';
 
 void main(List<String> args) {
