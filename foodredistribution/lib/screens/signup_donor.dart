@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:foodredistribution/screens/agent_page.dart';
 
-class ScreenLoginAgent extends StatefulWidget {
-  const ScreenLoginAgent({Key? key}) : super(key: key);
+class ScreenSignupDonor extends StatefulWidget {
+ScreenSignupDonor({ Key? key }) : super(key: key);
 
   @override
-  State<ScreenLoginAgent> createState() => _ScreenLoginAgentState();
+  State<ScreenSignupDonor> createState() => _ScreenSignupDonorState();
 }
 
-class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
-  final _usernameController = TextEditingController();
+class _ScreenSignupDonorState extends State<ScreenSignupDonor> {
+   final _usernameController = TextEditingController();
 
-  final _passwordController = TextEditingController();
+   final _passwordController = TextEditingController();
 
-  bool _isDataMatched = true;
+   bool _isDataMatched = true;
 
   final _formKey = GlobalKey<FormState>();
 
@@ -28,7 +27,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(
-                flex: 3,
+                flex: 2,
                 child: Container(
                   width: double.infinity,
                   child: Padding(
@@ -37,7 +36,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Welcome Back',
+                          'Welcome',
                           style: TextStyle(
                             fontSize: 30,
                             fontWeight: FontWeight.w800,
@@ -48,7 +47,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                           height: 10,
                         ),
                         Text(
-                          'Sign in back into your account',
+                          'Signup into your account',
                           style: TextStyle(
                             fontSize: 15,
                           ),
@@ -69,7 +68,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                     width: double.infinity,
                     height: double.infinity,
                     decoration: BoxDecoration(
-                        color: Colors.pink[300],
+                        color: Colors.orange,
                         borderRadius: const BorderRadius.only(
                           topLeft: Radius.circular(70),
                           topRight: Radius.circular(70),
@@ -86,7 +85,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                             Padding(
                               padding: const EdgeInsets.only(top: 20),
                               child: Text(
-                                'Sign In',
+                                'Sign Up',
                                 style: TextStyle(
                                   fontSize: 30,
                                   fontWeight: FontWeight.w600,
@@ -108,6 +107,37 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                                 enabledBorder: OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.white),
                                 ),
+                                labelText: 'Name',
+                                labelStyle: TextStyle(color: Colors.white),
+                                fillColor: Colors.white,
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                // hintText: 'Username',
+                              ),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Enter Username';
+                                } else {
+                                  return null;
+                                }
+                              },
+                            ),SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              controller: _usernameController,
+                              decoration: const InputDecoration(
+                                prefixIcon: Icon(
+                                  Icons.person,
+                                  color: Colors.white,
+                                ),
+                                border: OutlineInputBorder(),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
                                 labelText: 'Username',
                                 labelStyle: TextStyle(color: Colors.white),
                                 fillColor: Colors.white,
@@ -116,7 +146,6 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                                     color: Colors.white,
                                   ),
                                 ),
-                                // focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.white, width: ),),
                                 // hintText: 'Username',
                               ),
                               validator: (value) {
@@ -169,7 +198,7 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                                     checkLogin(context);
                                   } else {}
                                 },
-                                child: const Text('Sign In'),
+                                child: const Text('Sign Up'),
                                 style: OutlinedButton.styleFrom(
                                   primary: Colors.white,
                                   fixedSize: Size(200, 50),
@@ -186,15 +215,17 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 1,
                 child: Container(
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 90),
+                    padding: const EdgeInsets.only(bottom: 40),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Don't have an account yet?"),
-                        TextButton(onPressed: () {}, child: Text('Sign Up'))
+                        Text("Already have an account?"),
+                        TextButton(onPressed: () {
+                          Navigator.of(context).pop();
+                        }, child: Text('Sign In'))
                       ],
                     ),
                   ),
@@ -203,16 +234,17 @@ class _ScreenLoginAgentState extends State<ScreenLoginAgent> {
               )
             ],
           ),
-        ));
+        ),
+        );
   }
 
-  Future<void> checkLogin(BuildContext ctx) async {
+   Future<void> checkLogin(BuildContext ctx) async {
     final _username = _usernameController.text;
     final _password = _passwordController.text;
     if (_username == 'admin' && _password == 'admin') {
       // Goto Donor Page
       Navigator.of(context)
-          .push(MaterialPageRoute(builder: (ctx) => ScreenAgent()));
+          .pop();
     } else {
       print('Invalid');
     }
